@@ -37,4 +37,9 @@ jobs:
         cache-dependency-path: front/package-lock.json
     - run: npm ci
     - run: npm run test:prod
-    - run: npm run lint
+    - name: Publish Test Report
+      uses: dorny/test-reporter@v2.0.0
+      if: always() # Run even if tests fail
+      with:
+        name: code-coverage
+        path: front/coverage/bobapp/
